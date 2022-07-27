@@ -1,6 +1,5 @@
 export function App(){
-  return (
-    <h1>Hello World</h1>
-  )
+  throw new Error('Oloco bicho')
+  return <h1>Hello World</h1>
 }
 
