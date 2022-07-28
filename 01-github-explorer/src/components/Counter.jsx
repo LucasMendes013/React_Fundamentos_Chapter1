@@ -1,6 +1,8 @@
 //Sempre que uma função do react iniciar com 'use', chamamos-a de hook(gancho)
 import { useState } from 'react'
 
+//Imutabilidade : Criar um novo espaço na memória contendo a nova informação, do que alterar a informação que já está salva na memória
+
 export function Counter(){
   const [counter, setCounter] = useState(0)
 
