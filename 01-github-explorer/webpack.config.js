@@ -1,7 +1,7 @@
 const path = require('path') //Path sendo usado para não precisar colocar o caminho de todos os arquivos
 const HtmlWebpackPlugin = require('html-webpack-plugin') //Instalação deste puglin para otimizar nossa aplicação, o que adiciona index.html 
-
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
   mode: isDevelopment ? 'development' : 'production', //Setado o modo de desenvolvimento que é mais rápido que o convencional
@@ -16,18 +16,27 @@ module.exports = {
   },
   devServer: {
     static: path.resolve(__dirname, 'public'),
+    hot: true,
   },
   plugins: [
+    isDevelopment && new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html') 
     })
-  ],
+  ].filter(Boolean),
   module: {
     rules: [
         {
             test: /\.jsx$/,
             exclude: /node_modules/,
-            use: 'babel-loader' 
+            use: {
+              loader: 'babel-loader',
+              options: {
+                plugins: [
+                  isDevelopment && require.resolve('react-refresh/babel')
+                ].filter(Boolean)
+              }
+            }
         },
         {
             test: /\.scss$/,
