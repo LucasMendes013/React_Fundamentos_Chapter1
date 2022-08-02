@@ -6,13 +6,13 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   mode: isDevelopment ? 'development' : 'production', //Setado o modo de desenvolvimento que é mais rápido que o convencional
   devtool: isDevelopment ? 'eval-source-map' : 'source-map',//Faz com que no console do navegador, a informacao de linhas seja impressa corretamente
-  entry: path.resolve(__dirname, 'src', 'index.jsx'), //Especificando onde está acontecendo a passagem
+  entry: path.resolve(__dirname, 'src', 'index.tsx'), //Especificando onde está acontecendo a passagem
   output: {
     path: path.resolve(__dirname, 'dist'), //Usando o Babel
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx'], //Arquivos terminados com essas extensões resultam em não precisar especificar em momentos de importação e exportação de componentes.
+    extensions: ['.js', '.jsx', '.ts', '.tsx'], //Arquivos terminados com essas extensões resultam em não precisar especificar em momentos de importação e exportação de componentes.
   },
   devServer: {
     static: path.resolve(__dirname, 'public'),
@@ -27,7 +27,7 @@ module.exports = {
   module: {
     rules: [
         {
-            test: /\.jsx$/,
+            test: /\.(j|t)sx$/,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader',
